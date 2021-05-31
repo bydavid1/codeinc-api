@@ -1,0 +1,52 @@
+{
+  "kind": "singleType",
+  "collectionName": "owner_sites",
+  "info": {
+    "name": "owner-site",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "fullName": {
+      "type": "string"
+    },
+    "biography": {
+      "type": "text"
+    },
+    "grade": {
+      "type": "string"
+    },
+    "address": {
+      "type": "string"
+    },
+    "email": {
+      "type": "email"
+    },
+    "birthDate": {
+      "type": "date"
+    },
+    "facebook": {
+      "type": "string"
+    },
+    "twitter": {
+      "type": "string"
+    },
+    "linkedin": {
+      "type": "string"
+    },
+    "github": {
+      "type": "string"
+    },
+    "stackoverflow": {
+      "type": "string"
+    },
+    "codepen": {
+      "type": "string"
+    }
+  }
+}

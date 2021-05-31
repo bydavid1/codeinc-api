@@ -1,0 +1,51 @@
+{
+  "kind": "collectionType",
+  "collectionName": "posts",
+  "info": {
+    "name": "Posts",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "content": {
+      "type": "richtext"
+    },
+    "date": {
+      "type": "date"
+    },
+    "editorsPick": {
+      "type": "boolean"
+    },
+    "cover": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": true,
+      "pluginOptions": {}
+    },
+    "category": {
+      "model": "categories"
+    },
+    "slug": {
+      "type": "string",
+      "required": true,
+      "unique": true,
+      "minLength": 2,
+      "regex": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "tags": {
+      "collection": "tags"
+    }
+  }
+}
