@@ -46,6 +46,10 @@
     },
     "tags": {
       "collection": "tags"
+    },
+    "admin_user": {
+      "plugin": "admin",
+      "model": "user"
     }
   }
 }

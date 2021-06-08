@@ -34,7 +34,7 @@ module.exports = {
   },
 
   async slug(ctx){
-    let entity = await strapi.query('posts').model.findOne({ slug: ctx.params.slug })
+    let entity = await strapi.query('posts').model.findOne({ slug: ctx.params.slug }).populate('category', 'title').populate('admin_user', ['firstname', 'lastname'])
     return sanitizeEntity(entity, { model: strapi.models.posts })
   }
 };
