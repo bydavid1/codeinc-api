@@ -30,6 +30,7 @@ module.exports = {
       category: 1
     }).populate('cover', 'url').populate('category', ['title', 'slug']) //Fix this problem (just needed data)
 
+
     ctx.send(entities)
   },
 
