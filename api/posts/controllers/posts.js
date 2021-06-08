@@ -16,7 +16,7 @@ module.exports = {
       date: 1,
       cover: 1,
       category: 1
-    }).populate('cover', 'url').populate('category', 'title') //Fix this problem (just needed data)
+    }).populate('cover', 'url').populate('category', ['title', 'slug']) //Fix this problem (just needed data)
 
     ctx.send(entities)
   },
@@ -28,13 +28,37 @@ module.exports = {
       date: 1,
       cover: 1,
       category: 1
-    }).populate('cover', 'url').populate('category', 'title') //Fix this problem (just needed data)
+    }).populate('cover', 'url').populate('category', ['title', 'slug']) //Fix this problem (just needed data)
 
     ctx.send(entities)
   },
 
   async slug(ctx){
-    let entity = await strapi.query('posts').model.findOne({ slug: ctx.params.slug }).populate('category', 'title').populate('admin_user', ['firstname', 'lastname'])
+    let entity = await strapi.query('posts').model.findOne({ slug: ctx.params.slug }).populate('category', [ 'title', 'slug']).populate('admin_user', ['firstname', 'lastname'])
     return sanitizeEntity(entity, { model: strapi.models.posts })
+  },
+
+  async getByCategory(ctx) {
+    let category, results;
+    category = await strapi.query('categories').model.find({slug: ctx.params.slug}).select({
+      _id: 1
+    })
+
+    if (category.length > 0) {
+      results = await strapi.query('posts').model.find({category: category[0]._id}).select({
+        title: 1,
+        slug: 1,
+        date: 1,
+        cover: 1,
+        category: 1
+      }).populate('cover', 'url').populate('category', ['title', 'slug'])
+      ctx.send(results)
+    } else {
+      ctx.send({
+        results: 0
+      })
+    }
+
+
   }
 };
