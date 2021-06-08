@@ -34,6 +34,14 @@
     },
     {
       "method": "GET",
+      "path": "/posts/category/:slug",
+      "handler": "posts.getByCategory",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
       "path": "/posts/count",
       "handler": "posts.count",
       "config": {
