@@ -1,9 +1,8 @@
 {
   "kind": "singleType",
-  "collectionName": "about_pages",
+  "collectionName": "home_pages",
   "info": {
-    "name": "About page",
-    "description": ""
+    "name": "Home Page"
   },
   "options": {
     "increments": true,
@@ -12,34 +11,28 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "content": {
-      "type": "richtext"
+    "title": {
+      "type": "string"
     },
-    "extract": {
-      "type": "text",
-      "maxLength": 160,
-      "minLength": 80,
-      "required": true
+    "extraxt": {
+      "type": "text"
     },
     "image": {
       "model": "file",
       "via": "related",
       "allowedTypes": [
-        "images"
+        "images",
+        "files",
+        "videos"
       ],
       "plugin": "upload",
       "required": false,
       "pluginOptions": {}
     },
-    "url": {
-      "type": "string",
-      "required": true
-    },
     "type": {
-      "type": "string",
-      "required": true
+      "type": "string"
     },
-    "title": {
+    "url": {
       "type": "string"
     }
   }
