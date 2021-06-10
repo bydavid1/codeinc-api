@@ -41,19 +41,26 @@ module.exports = {
 
   async getByCategory(ctx) {
     let category, results;
-    category = await strapi.query('categories').model.find({slug: ctx.params.slug}).select({
-      _id: 1
+    category = await strapi.query('categories').model.findOne({slug: ctx.params.slug}).select({
+      _id: 1,
+      title: 1,
+      description: 1,
+      cover: 1,
+      slug: 1
     })
+    console.log(category)
 
-    if (category.length > 0) {
-      results = await strapi.query('posts').model.find({category: category[0]._id}).select({
+    if (category) {
+      results = await strapi.query('posts').model.find({category: category._id}).select({
         title: 1,
         slug: 1,
         date: 1,
         cover: 1,
-        category: 1
-      }).populate('cover', 'url').populate('category', ['title', 'slug'])
-      ctx.send(results)
+      }).populate('cover', 'url')
+      ctx.send({
+        category: category,
+        posts: results
+      })
     } else {
       ctx.send({
         results: 0
