@@ -18,6 +18,22 @@
     },
     {
       "method": "GET",
+      "path": "/tags/menu",
+      "handler": "tags.menu",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/tags/:slug/posts",
+      "handler": "tags.slug",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
       "path": "/tags/:id",
       "handler": "tags.findOne",
       "config": {

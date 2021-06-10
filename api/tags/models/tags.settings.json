@@ -2,7 +2,8 @@
   "kind": "collectionType",
   "collectionName": "tags",
   "info": {
-    "name": "tags"
+    "name": "tags",
+    "description": ""
   },
   "options": {
     "increments": true,
@@ -25,6 +26,10 @@
       "plugin": "upload",
       "required": false,
       "pluginOptions": {}
+    },
+    "slug": {
+      "type": "string",
+      "regex": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
     }
   }
 }

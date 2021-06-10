@@ -66,7 +66,5 @@ module.exports = {
         results: 0
       })
     }
-
-
   }
 };
