@@ -48,7 +48,6 @@ module.exports = {
       cover: 1,
       slug: 1
     })
-    console.log(category)
 
     if (category) {
       results = await strapi.query('posts').model.find({category: category._id}).select({
@@ -62,9 +61,7 @@ module.exports = {
         posts: results
       })
     } else {
-      ctx.send({
-        results: 0
-      })
+      ctx.status = 404
     }
   }
 };

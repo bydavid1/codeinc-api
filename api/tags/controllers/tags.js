@@ -17,25 +17,21 @@ module.exports = {
     let tag, results;
     tag = await strapi.query('tags').model.findOne({slug: ctx.params.slug}).select({
       _id: 1,
-      logo:0
+      name: 1,
+      extract:1,
+      slug: 1,
+      logo: 1,
     })
-    console.log(tag)
 
     if (tag) {
-      results = await strapi.query('posts').model.find({tags: tag._id}).select({
-        title: 1,
-        slug: 1,
-        date: 1,
-        cover: 1,
-        category: 1
-      }).populate('category', 'url')
+      results = await strapi.query('posts').model.find({tags: tag._id}, 'title slug date category cover')
+        .populate('category', {title: 1, slug: 1, cover: 0})
       ctx.send({
+        tag: tag,
         posts: results
       })
     } else {
-      ctx.send({
-        results: 0
-      })
+      ctx.status = 404
     }
  },
 };
