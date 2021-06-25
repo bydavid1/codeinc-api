@@ -2,7 +2,7 @@
   "kind": "singleType",
   "collectionName": "owner_sites",
   "info": {
-    "name": "owner-site",
+    "name": "Portfolio",
     "description": ""
   },
   "options": {
@@ -47,6 +47,26 @@
     },
     "codepen": {
       "type": "string"
+    },
+    "Proyectos": {
+      "type": "component",
+      "repeatable": true,
+      "component": "portafolio.proyectos"
+    },
+    "Skills": {
+      "type": "component",
+      "repeatable": true,
+      "component": "portafolio.skills"
+    },
+    "Certifications": {
+      "type": "component",
+      "repeatable": true,
+      "component": "portafolio.certifications"
+    },
+    "Experience": {
+      "type": "component",
+      "repeatable": true,
+      "component": "portafolio.experience"
     }
   }
 }

@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_portafolio_experiences",
+  "info": {
+    "name": "Experience",
+    "icon": "briefcase"
+  },
+  "options": {},
+  "attributes": {
+    "jobTitle": {
+      "type": "string"
+    },
+    "startDate": {
+      "type": "date"
+    },
+    "endDate": {
+      "type": "date"
+    },
+    "description": {
+      "type": "richtext"
+    }
+  }
+}
