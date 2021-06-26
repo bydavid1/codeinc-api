@@ -8,19 +8,24 @@
   "options": {},
   "attributes": {
     "title": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "school": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "startDate": {
-      "type": "date"
+      "type": "date",
+      "required": true
     },
     "endDate": {
-      "type": "date"
+      "type": "date",
+      "required": true
     },
     "isImportant": {
-      "type": "boolean"
+      "type": "boolean",
+      "required": true
     }
   }
 }
