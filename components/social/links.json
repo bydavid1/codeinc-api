@@ -1,0 +1,28 @@
+{
+  "collectionName": "components_social_links",
+  "info": {
+    "name": "Links",
+    "icon": "link"
+  },
+  "options": {},
+  "attributes": {
+    "facebook": {
+      "type": "string"
+    },
+    "twitter": {
+      "type": "string"
+    },
+    "linkedin": {
+      "type": "string"
+    },
+    "github": {
+      "type": "string"
+    },
+    "stackoverflow": {
+      "type": "string"
+    },
+    "codepen": {
+      "type": "string"
+    }
+  }
+}

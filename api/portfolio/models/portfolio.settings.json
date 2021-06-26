@@ -1,0 +1,39 @@
+{
+  "kind": "singleType",
+  "collectionName": "portfolios",
+  "info": {
+    "name": "Portfolio"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "fullName": {
+      "type": "string",
+      "required": true
+    },
+    "biography": {
+      "type": "text"
+    },
+    "grade": {
+      "type": "string"
+    },
+    "address": {
+      "type": "string"
+    },
+    "email": {
+      "type": "email"
+    },
+    "birthDate": {
+      "type": "date"
+    },
+    "Links": {
+      "type": "component",
+      "repeatable": false,
+      "component": "social.links"
+    }
+  }
+}
