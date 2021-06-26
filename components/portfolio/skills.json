@@ -1,8 +1,9 @@
 {
-  "collectionName": "components_portafolio_skills",
+  "collectionName": "components_portfolio_skills",
   "info": {
     "name": "Skills",
-    "icon": "check-double"
+    "icon": "check-double",
+    "description": ""
   },
   "options": {},
   "attributes": {

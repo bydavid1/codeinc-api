@@ -1,8 +1,9 @@
 {
-  "collectionName": "components_portafolio_experiences",
+  "collectionName": "components_portfolio_experiences",
   "info": {
     "name": "Experience",
-    "icon": "briefcase"
+    "icon": "briefcase",
+    "description": ""
   },
   "options": {},
   "attributes": {

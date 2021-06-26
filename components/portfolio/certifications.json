@@ -1,8 +1,9 @@
 {
-  "collectionName": "components_portafolio_certifications",
+  "collectionName": "components_portfolio_certifications",
   "info": {
     "name": "Certifications",
-    "icon": "user-graduate"
+    "icon": "user-graduate",
+    "description": ""
   },
   "options": {},
   "attributes": {

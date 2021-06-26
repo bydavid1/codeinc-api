@@ -1,8 +1,9 @@
 {
-  "collectionName": "components_portafolio_proyectos",
+  "collectionName": "components_portfolio_projects",
   "info": {
-    "name": "Proyectos",
-    "icon": "tv"
+    "name": "Projects",
+    "icon": "tv",
+    "description": ""
   },
   "options": {},
   "attributes": {
