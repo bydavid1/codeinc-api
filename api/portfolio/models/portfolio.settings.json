@@ -2,7 +2,8 @@
   "kind": "singleType",
   "collectionName": "portfolios",
   "info": {
-    "name": "Portfolio"
+    "name": "Portfolio",
+    "description": ""
   },
   "options": {
     "increments": true,
@@ -30,10 +31,30 @@
     "birthDate": {
       "type": "date"
     },
-    "Links": {
+    "links": {
       "type": "component",
       "repeatable": false,
       "component": "social.links"
+    },
+    "certifications": {
+      "type": "component",
+      "repeatable": true,
+      "component": "portfolio.certifications"
+    },
+    "experience": {
+      "type": "component",
+      "repeatable": true,
+      "component": "portfolio.experience"
+    },
+    "projects": {
+      "type": "component",
+      "repeatable": true,
+      "component": "portfolio.proyectos"
+    },
+    "skills": {
+      "type": "component",
+      "repeatable": true,
+      "component": "portfolio.skills"
     }
   }
 }
