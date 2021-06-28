@@ -13,7 +13,8 @@
   "pluginOptions": {},
   "attributes": {
     "title": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "description": {
       "type": "text"
@@ -31,11 +32,8 @@
       "pluginOptions": {}
     },
     "slug": {
-      "type": "string",
-      "regex": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
-      "required": true,
-      "unique": true,
-      "minLength": 2
+      "type": "uid",
+      "targetField": "title"
     }
   }
 }
