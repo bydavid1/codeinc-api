@@ -10,16 +10,8 @@
     },
     {
       "method": "GET",
-      "path": "/posts/home/editorsChoice",
-      "handler": "posts.test",
-      "config": {
-        "policies": []
-      }
-    },
-    {
-      "method": "GET",
-      "path": "/posts/home/recent",
-      "handler": "posts.recent",
+      "path": "/posts/home",
+      "handler": "posts.home",
       "config": {
         "policies": []
       }

@@ -8,31 +8,53 @@ const { sanitizeEntity } = require('strapi-utils');
 
 module.exports = {
 
-  async test(ctx){
-    let entities;
-    entities = await strapi.query('posts').model.find({ editorsPick: true}).select({
+  /*
+  * Home page posts (recents, editors pick and more)
+  */
+
+  async home(ctx){
+
+    const requiredData = {
       title: 1,
       slug: 1,
       date: 1,
-      cover: 1,
-      category: 1
-    }).populate('cover', 'url').populate('category', ['title', 'slug']) //Fix this problem (just needed data)
+      category: 1,
+      cover: { url: 1 }
+    }
 
-    ctx.send(entities)
+    const populateData = [
+      {
+        path: 'category',
+        select: ['title', 'slug']
+      }
+    ]
+
+    let editorsPick = await strapi.query('posts')
+      .model.find({ editorsPick: true}, requiredData)
+      .limit(3)
+      .populate(populateData)
+
+    let recents = await strapi.query('posts')
+      .model.find({}, requiredData)
+      .sort({'date': 'descending'})
+      .populate(populateData)
+
+      console.log(editorsPick)
+      console.log(recents)
   },
 
-  async recent(ctx){
-    let entities = await strapi.query('posts').model.find({}).sort({'date': 'descending'}).select({
-      title: 1,
-      slug: 1,
-      date: 1,
-      cover: 1,
-      category: 1
-    }).populate('cover', 'url').populate('category', ['title', 'slug']) //Fix this problem (just needed data)
+  // async recent(ctx){
+  //   let entities = await strapi.query('posts').model.find({}).sort({'date': 'descending'}).select({
+  //     title: 1,
+  //     slug: 1,
+  //     date: 1,
+  //     cover: 1,
+  //     category: 1
+  //   }).populate('cover', 'url').populate('category', ['title', 'slug']) //Fix this problem (just needed data)
 
 
-    ctx.send(entities)
-  },
+  //   ctx.send(entities)
+  // },
 
   async slug(ctx){
     let entity = await strapi.query('posts').model.findOne({ slug: ctx.params.slug }).populate('category', [ 'title', 'slug']).populate('admin_user', ['firstname', 'lastname'])
