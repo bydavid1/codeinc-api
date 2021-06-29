@@ -18,43 +18,52 @@ module.exports = {
       title: 1,
       slug: 1,
       date: 1,
-      category: 1,
-      cover: { url: 1 }
     }
 
     const populateData = [
       {
         path: 'category',
         select: ['title', 'slug']
+      },
+      {
+        path: 'created_by',
+        select: ['firstname', 'lastname']
       }
     ]
 
-    let editorsPick = await strapi.query('posts')
-      .model.find({ editorsPick: true}, requiredData)
-      .limit(3)
-      .populate(populateData)
-
-    let recents = await strapi.query('posts')
-      .model.find({}, requiredData)
+    const recents = await strapi.query('posts')
+      .model.find({},  requiredData)
       .sort({'date': 'descending'})
       .populate(populateData)
 
-      console.log(editorsPick)
-      console.log(recents)
+    const editorsPick = await strapi.query('posts')
+      .model.find({ editorsPick: true },  requiredData)
+      .sort({'date': 'descending'})
+      .populate(populateData)
+
+    let data = {
+      ids: {
+        'recents': [],
+        'editorsPick': []
+      },
+      posts: []
+    }
+
+    recents.map(item => {
+        data.ids.recents.push(`${item._id}`)
+        data.posts.push(item)
+    })
+
+    editorsPick.map(item => {
+      data.ids.editorsPick.push(`${item._id}`)
+
+      if (data.ids.recents.indexOf(`${item._id}`) === -1) {
+        data.posts.push(item)
+      }
+    })
+
+    ctx.send(data)
   },
-
-  // async recent(ctx){
-  //   let entities = await strapi.query('posts').model.find({}).sort({'date': 'descending'}).select({
-  //     title: 1,
-  //     slug: 1,
-  //     date: 1,
-  //     cover: 1,
-  //     category: 1
-  //   }).populate('cover', 'url').populate('category', ['title', 'slug']) //Fix this problem (just needed data)
-
-
-  //   ctx.send(entities)
-  // },
 
   async slug(ctx){
     let entity = await strapi.query('posts').model.findOne({ slug: ctx.params.slug }).populate('category', [ 'title', 'slug']).populate('admin_user', ['firstname', 'lastname'])
