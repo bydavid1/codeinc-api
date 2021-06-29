@@ -6,56 +6,99 @@ const { sanitizeEntity } = require('strapi-utils');
  * to customize this controller
  */
 
+ const requiredData = {
+  title: 1,
+  slug: 1,
+  date: 1,
+}
+
+const populateData = [
+  {
+    path: 'category',
+    select: ['title', 'slug']
+  },
+  {
+    path: 'created_by',
+    select: ['firstname', 'lastname']
+  }
+]
+
 module.exports = {
 
-  async test(ctx){
-    let entities;
-    entities = await strapi.query('posts').model.find({ editorsPick: true}).select({
-      title: 1,
-      slug: 1,
-      date: 1,
-      cover: 1,
-      category: 1
-    }).populate('cover', 'url').populate('category', ['title', 'slug']) //Fix this problem (just needed data)
+  /*
+  * Home page posts (recents, editors pick and more)
+  */
 
-    ctx.send(entities)
-  },
+  async home(ctx){
 
-  async recent(ctx){
-    let entities = await strapi.query('posts').model.find({}).sort({'date': 'descending'}).select({
-      title: 1,
-      slug: 1,
-      date: 1,
-      cover: 1,
-      category: 1
-    }).populate('cover', 'url').populate('category', ['title', 'slug']) //Fix this problem (just needed data)
+    const recents = await strapi.query('posts')
+      .model.find({},  requiredData)
+      .sort({'date': 'descending'})
+      .populate(populateData)
 
+    const editorsPick = await strapi.query('posts')
+      .model.find({ editorsPick: true },  requiredData)
+      .sort({'date': 'descending'})
+      .populate(populateData)
 
-    ctx.send(entities)
-  },
+    let data = {
+      ids: {
+        'recents': [],
+        'editorsPick': []
+      },
+      posts: []
+    }
 
-  async slug(ctx){
-    let entity = await strapi.query('posts').model.findOne({ slug: ctx.params.slug }).populate('category', [ 'title', 'slug']).populate('admin_user', ['firstname', 'lastname'])
-    return sanitizeEntity(entity, { model: strapi.models.posts })
-  },
-
-  async getByCategory(ctx) {
-    let category, results;
-    category = await strapi.query('categories').model.findOne({slug: ctx.params.slug}).select({
-      _id: 1,
-      title: 1,
-      description: 1,
-      cover: 1,
-      slug: 1
+    recents.map(item => {
+        data.ids.recents.push(`${item._id}`)
+        data.posts.push(item)
     })
 
-    if (category) {
-      results = await strapi.query('posts').model.find({category: category._id}).select({
+    editorsPick.map(item => {
+      data.ids.editorsPick.push(`${item._id}`)
+
+      if (data.ids.recents.indexOf(`${item._id}`) === -1) {
+        data.posts.push(item)
+      }
+    })
+
+    ctx.send(data)
+  },
+
+  /*
+  * Find post by slug
+  */
+
+  async findBySlug(ctx){
+
+    const entity = await strapi.query('posts')
+      .model.findOne({ slug: ctx.params.slug })
+      .populate(populateData)
+
+    ctx.send(entity)
+  },
+
+  /*
+  * Find posts by categorie
+  */
+
+  async findByCategory(ctx) {
+    let category, results;
+    category = await strapi.query('categories')
+      .model.findOne({slug: ctx.params.slug})
+      .select({
+        _id: 1,
         title: 1,
-        slug: 1,
-        date: 1,
+        description: 1,
         cover: 1,
-      }).populate('cover', 'url')
+        slug: 1
+      })
+
+    if (category) {
+      results = await strapi.query('posts')
+      .model.find({category: category._id}, requiredData)
+      .populate(populateData)
+
       ctx.send({
         category: category,
         posts: results

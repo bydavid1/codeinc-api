@@ -1,0 +1,31 @@
+{
+  "collectionName": "components_portfolio_certifications",
+  "info": {
+    "name": "Certifications",
+    "icon": "user-graduate",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "school": {
+      "type": "string",
+      "required": true
+    },
+    "startDate": {
+      "type": "date",
+      "required": true
+    },
+    "endDate": {
+      "type": "date",
+      "required": true
+    },
+    "isImportant": {
+      "type": "boolean",
+      "required": true
+    }
+  }
+}

@@ -13,10 +13,12 @@
   "pluginOptions": {},
   "attributes": {
     "title": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "content": {
-      "type": "richtext"
+      "type": "richtext",
+      "required": true
     },
     "date": {
       "type": "date"
@@ -37,19 +39,13 @@
     "category": {
       "model": "categories"
     },
-    "slug": {
-      "type": "string",
-      "required": true,
-      "unique": true,
-      "minLength": 2,
-      "regex": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
-    },
     "tags": {
       "collection": "tags"
     },
-    "admin_user": {
-      "plugin": "admin",
-      "model": "user"
+    "slug": {
+      "type": "uid",
+      "targetField": "title",
+      "required": true
     }
   }
 }

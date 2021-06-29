@@ -2,24 +2,24 @@
   "routes": [
     {
       "method": "GET",
-      "path": "/owner-site",
-      "handler": "owner-site.find",
+      "path": "/portfolio",
+      "handler": "portfolio.find",
       "config": {
         "policies": []
       }
     },
     {
       "method": "PUT",
-      "path": "/owner-site",
-      "handler": "owner-site.update",
+      "path": "/portfolio",
+      "handler": "portfolio.update",
       "config": {
         "policies": []
       }
     },
     {
       "method": "DELETE",
-      "path": "/owner-site",
-      "handler": "owner-site.delete",
+      "path": "/portfolio",
+      "handler": "portfolio.delete",
       "config": {
         "policies": []
       }
