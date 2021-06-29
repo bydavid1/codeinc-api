@@ -19,7 +19,7 @@
     {
       "method": "GET",
       "path": "/posts/content/:slug",
-      "handler": "posts.slug",
+      "handler": "posts.findBySlug",
       "config": {
         "policies": []
       }
@@ -27,7 +27,7 @@
     {
       "method": "GET",
       "path": "/posts/category/:slug",
-      "handler": "posts.getByCategory",
+      "handler": "posts.findByCategory",
       "config": {
         "policies": []
       }

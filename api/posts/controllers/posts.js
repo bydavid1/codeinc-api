@@ -6,6 +6,23 @@ const { sanitizeEntity } = require('strapi-utils');
  * to customize this controller
  */
 
+ const requiredData = {
+  title: 1,
+  slug: 1,
+  date: 1,
+}
+
+const populateData = [
+  {
+    path: 'category',
+    select: ['title', 'slug']
+  },
+  {
+    path: 'created_by',
+    select: ['firstname', 'lastname']
+  }
+]
+
 module.exports = {
 
   /*
@@ -13,23 +30,6 @@ module.exports = {
   */
 
   async home(ctx){
-
-    const requiredData = {
-      title: 1,
-      slug: 1,
-      date: 1,
-    }
-
-    const populateData = [
-      {
-        path: 'category',
-        select: ['title', 'slug']
-      },
-      {
-        path: 'created_by',
-        select: ['firstname', 'lastname']
-      }
-    ]
 
     const recents = await strapi.query('posts')
       .model.find({},  requiredData)
@@ -65,28 +65,40 @@ module.exports = {
     ctx.send(data)
   },
 
-  async slug(ctx){
-    let entity = await strapi.query('posts').model.findOne({ slug: ctx.params.slug }).populate('category', [ 'title', 'slug']).populate('admin_user', ['firstname', 'lastname'])
-    return sanitizeEntity(entity, { model: strapi.models.posts })
+  /*
+  * Find post by slug
+  */
+
+  async findBySlug(ctx){
+
+    const entity = await strapi.query('posts')
+      .model.findOne({ slug: ctx.params.slug })
+      .populate(populateData)
+
+    ctx.send(entity)
   },
 
-  async getByCategory(ctx) {
+  /*
+  * Find posts by categorie
+  */
+
+  async findByCategory(ctx) {
     let category, results;
-    category = await strapi.query('categories').model.findOne({slug: ctx.params.slug}).select({
-      _id: 1,
-      title: 1,
-      description: 1,
-      cover: 1,
-      slug: 1
-    })
+    category = await strapi.query('categories')
+      .model.findOne({slug: ctx.params.slug})
+      .select({
+        _id: 1,
+        title: 1,
+        description: 1,
+        cover: 1,
+        slug: 1
+      })
 
     if (category) {
-      results = await strapi.query('posts').model.find({category: category._id}).select({
-        title: 1,
-        slug: 1,
-        date: 1,
-        cover: 1,
-      }).populate('cover', 'url')
+      results = await strapi.query('posts')
+      .model.find({category: category._id}, requiredData)
+      .populate(populateData)
+
       ctx.send({
         category: category,
         posts: results
