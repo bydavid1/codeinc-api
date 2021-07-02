@@ -15,32 +15,13 @@
     "content": {
       "type": "richtext"
     },
-    "extract": {
-      "type": "text",
-      "maxLength": 160,
-      "minLength": 80,
-      "required": true
-    },
-    "image": {
-      "model": "file",
-      "via": "related",
-      "allowedTypes": [
-        "images"
-      ],
-      "plugin": "upload",
-      "required": false,
-      "pluginOptions": {}
-    },
-    "url": {
-      "type": "string",
-      "required": true
-    },
-    "type": {
-      "type": "string",
-      "required": true
-    },
     "title": {
       "type": "string"
+    },
+    "SEO": {
+      "type": "component",
+      "repeatable": false,
+      "component": "social.open-graph"
     }
   }
 }
