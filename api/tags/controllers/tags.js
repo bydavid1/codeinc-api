@@ -25,7 +25,7 @@ module.exports = {
 
 
   async menu(ctx) {
-     let entities = await strapi.query('tags').model.find({}, {_id:1,name:1,slug:1,logo:0}).limit(4)
+     let entities = await strapi.query('tags').model.find({}, {_id:1,name:1,slug:1}).limit(4)
 
     ctx.send(entities)
   },
