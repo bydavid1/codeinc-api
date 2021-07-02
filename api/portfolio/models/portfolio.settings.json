@@ -31,6 +31,16 @@
     "birthDate": {
       "type": "date"
     },
+    "profile": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": true,
+      "pluginOptions": {}
+    },
     "links": {
       "type": "component",
       "repeatable": false,
@@ -56,15 +66,10 @@
       "repeatable": true,
       "component": "portfolio.skills"
     },
-    "profile": {
-      "model": "file",
-      "via": "related",
-      "allowedTypes": [
-        "images"
-      ],
-      "plugin": "upload",
-      "required": true,
-      "pluginOptions": {}
+    "SEO": {
+      "type": "component",
+      "repeatable": false,
+      "component": "social.open-graph"
     }
   }
 }

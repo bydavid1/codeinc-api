@@ -15,26 +15,10 @@
     "title": {
       "type": "string"
     },
-    "extract": {
-      "type": "text"
-    },
-    "image": {
-      "model": "file",
-      "via": "related",
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos"
-      ],
-      "plugin": "upload",
-      "required": false,
-      "pluginOptions": {}
-    },
-    "type": {
-      "type": "string"
-    },
-    "url": {
-      "type": "string"
+    "SEO": {
+      "type": "component",
+      "repeatable": false,
+      "component": "social.open-graph"
     }
   }
 }
