@@ -55,6 +55,16 @@
       "type": "component",
       "repeatable": true,
       "component": "portfolio.skills"
+    },
+    "profile": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": true,
+      "pluginOptions": {}
     }
   }
 }
