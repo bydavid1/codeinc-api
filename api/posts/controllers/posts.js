@@ -81,34 +81,4 @@ module.exports = {
         ctx.status = 404
       }
   },
-
-  /*
-  * Find posts by categorie
-  */
-
-  async findByCategory(ctx) {
-    let category, results;
-    category = await strapi.query('categories')
-      .model.findOne({slug: ctx.params.slug})
-      .select({
-        _id: 1,
-        title: 1,
-        description: 1,
-        cover: 1,
-        slug: 1
-      })
-
-    if (category) {
-      results = await strapi.query('posts')
-      .model.find({category: category._id}, requiredData)
-      .populate(populateData)
-
-      ctx.send({
-        category: category,
-        posts: results
-      })
-    } else {
-      ctx.status = 404
-    }
-  }
 };

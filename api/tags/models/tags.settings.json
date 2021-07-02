@@ -17,25 +17,15 @@
       "required": true,
       "unique": true
     },
-    "logo": {
-      "model": "file",
-      "via": "related",
-      "allowedTypes": [
-        "images"
-      ],
-      "plugin": "upload",
-      "required": false,
-      "pluginOptions": {}
-    },
-    "extract": {
-      "type": "text",
-      "maxLength": 160,
-      "minLength": 100
-    },
     "slug": {
       "type": "uid",
       "targetField": "name",
       "required": true
+    },
+    "SEO": {
+      "type": "component",
+      "repeatable": false,
+      "component": "social.open-graph"
     }
   }
 }
