@@ -18,6 +18,14 @@
     },
     {
       "method": "GET",
+      "path": "/categories/:slug/posts",
+      "handler": "categories.slug",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
       "path": "/categories/:id",
       "handler": "categories.findOne",
       "config": {
