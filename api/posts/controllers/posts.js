@@ -75,7 +75,11 @@ module.exports = {
       .model.findOne({ slug: ctx.params.slug })
       .populate(populateData)
 
-    ctx.send(entity)
+      if (entity) {
+        ctx.send(entity)
+      } else {
+        ctx.status = 404
+      }
   },
 
   /*
